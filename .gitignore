@@ -1,1 +1,9 @@
 node_modules/
+.pnpm-store/
+.pnpm-state/
+lib/
+artifacts/
+*.tgz
+*.tsbuildinfo
+.vite-output/
+.DS_Store

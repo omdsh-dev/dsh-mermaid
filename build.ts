@@ -1,4 +1,4 @@
-import { buildPlugin } from '../../tools/build-plugin.ts';
+import { buildPlugin } from './tools/build-plugin.ts';
 
 await buildPlugin({
   root: new URL('./', import.meta.url),

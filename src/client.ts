@@ -116,6 +116,19 @@ export function mount(document: Document, load: () => Promise<MermaidRuntime> = 
     }
     const copy=copyLabel(state.copyTimer!==null);
     state.copy.title=copy; state.copy.setAttribute('aria-label',copy);
+    const svg=state.pane.querySelector('svg');
+    if(svg?.getAttribute('aria-label')?.startsWith('Mermaid ')) svg.setAttribute('aria-label','Mermaid '+label('diagram'));
+    if(state.wrapper.dataset.state==='loading') state.status.textContent=loading();
+    if(['正在绘制图表…','Rendering diagram…'].includes(state.pane.textContent || '')) state.pane.textContent=loading();
+    const error=state.error.textContent || '';
+    for(const prefix of ['图表未能渲染，已保留源码：','Could not render diagram; source preserved: ']) {
+      if(!error.startsWith(prefix)) continue;
+      let detail=error.slice(prefix.length);
+      if(['图表超过 50,000 字符或 2,000 行限制','Diagram exceeds 50,000 characters or 2,000 lines'].includes(detail)) detail=chinese()?'图表超过 50,000 字符或 2,000 行限制':'Diagram exceeds 50,000 characters or 2,000 lines';
+      state.error.textContent=(chinese()?'图表未能渲染，已保留源码：':'Could not render diagram; source preserved: ')+detail;
+      state.status.textContent=state.error.textContent;
+      break;
+    }
   }
   function showCopied(state: BlockState, copied: boolean) {
     window.clearTimeout(state.copyTimer ?? undefined);
@@ -262,8 +275,10 @@ export function mount(document: Document, load: () => Promise<MermaidRuntime> = 
   });
   observer.observe(document.body,{childList:true,subtree:true,characterData:true,attributes:true,attributeFilter:['class']});
   let themeFingerprint=JSON.stringify(themeConfig(document));
+  const localizeAll=()=>{for(const state of states.values()) localize(state);};
+  window.addEventListener('languagechange',localizeAll);
   const themeObserver=new window.MutationObserver(()=>{
-    for(const state of states.values()) localize(state);
+    localizeAll();
     const next=JSON.stringify(themeConfig(document));
     if(next===themeFingerprint) return;
     themeFingerprint=next;themeRevision++;cache.clear();
@@ -272,6 +287,6 @@ export function mount(document: Document, load: () => Promise<MermaidRuntime> = 
   themeObserver.observe(document.body,{attributes:true,attributeFilter:['data-ds-dark-theme','data-acrylic-wallpaper','data-acrylic-fluent','style','class']});
   themeObserver.observe(document.documentElement,{attributes:true,attributeFilter:['lang','style','class']});
   document.querySelectorAll('pre code').forEach(mountCode);
-  return ()=>{disposed=true;observer.disconnect();themeObserver.disconnect();for(const state of states.values()) cleanup(state);viewport.disconnect();queue.clear();cache.clear();style.remove();};
+  return ()=>{disposed=true;window.removeEventListener('languagechange',localizeAll);observer.disconnect();themeObserver.disconnect();for(const state of states.values()) cleanup(state);viewport.disconnect();queue.clear();cache.clear();style.remove();};
 }
 export function apply(ctx: EffectContext) {ctx.effect(()=>typeof document==='undefined'?undefined:mount(document));}
