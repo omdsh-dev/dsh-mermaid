@@ -37,4 +37,4 @@ jobs:
           EXPECTED_VERSION: ${{ inputs.version }}
         run: node --input-type=module -e "import fs from 'node:fs'; const p=JSON.parse(fs.readFileSync('package.json','utf8')); if(p.version!==process.env.EXPECTED_VERSION) throw new Error('Version confirmation does not match package.json');"
       - name: Publish checked archive with OIDC
-        run: npm publish artifacts/package.tgz --access public --provenance
+        run: npm publish ./artifacts/package.tgz --access public --provenance
