@@ -1,6 +1,6 @@
 {
   "name": "@shellraining/dsh-mermaid",
-  "version": "0.5.9",
+  "version": "0.5.10",
   "description": "Render Mermaid diagrams, switch between code and diagram views, and copy the source.",
   "type": "module",
   "license": "MIT",

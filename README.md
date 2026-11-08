@@ -2,7 +2,7 @@
 
 English · [简体中文](README.zh-CN.md)
 
-Render Mermaid diagrams in the DeepSeek Harness Web GUI, switch between code and diagram views, and copy the source. Forked from [MrmoLabs/dsh-mermaid](https://github.com/MrmoLabs/dsh-mermaid), originally by Mrmo072, under the MIT license. This standalone repository is prepared for `omdsh-dev/dsh-mermaid`; repository creation and transfer are separate manual steps. Oh My DSH is an independent, unofficial community.
+Render Mermaid diagrams in the DeepSeek Harness Web GUI, switch between code and diagram views, and copy the source. Forked from [MrmoLabs/dsh-mermaid](https://github.com/MrmoLabs/dsh-mermaid), originally by Mrmo072, under the MIT license. This plugin is maintained independently in `omdsh-dev/dsh-mermaid`. Oh My DSH is an independent, unofficial community.
 
 ## Install
 
@@ -41,7 +41,7 @@ The repository has no test suite. Do not add or rewrite tests without explicit a
 
 `check.yml` installs, type-checks, builds, packs and validates the archive on pushes and pull requests. Actions are pinned to the original repository's SHAs. `release.yml` publishes only after a manual dispatch on `main` and an exact version confirmation. Pushing to `main` never publishes. The workflow checks the archive before publishing that same archive with npm OIDC and provenance; it does not use an npm token.
 
-Before the first release from the new repository, register its maintainer, confirm npm publishing rights, and update the npm trusted publisher to `omdsh-dev/dsh-mermaid` with workflow `release.yml`. The retained version may already exist on npm and cannot be republished; a maintainer must explicitly authorize a new version before publishing. This preparation does not create a remote repository or publish a package.
+Before the first release from the new repository, register its maintainer, confirm npm publishing rights, and update the npm trusted publisher to `omdsh-dev/dsh-mermaid` with workflow `release.yml`. Existing npm versions cannot be republished; a maintainer must explicitly authorize a new version before publishing.
 
 See the [release checklist](README.zh-CN.md#发布前清单) for manual verification. Report ordinary issues through the repository issue tracker after it exists. Do not post secrets, personal data, or exploitable vulnerabilities publicly; use GitHub private vulnerability reporting if enabled, otherwise arrange a private channel with a registered maintainer before sending details.
 

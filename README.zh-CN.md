@@ -2,7 +2,7 @@
 
 [English](README.md) · 简体中文
 
-在 DeepSeek Harness Web GUI 中渲染 Mermaid 图表，切换代码和图表视图、复制源码。基于 Mrmo072 的 [MrmoLabs/dsh-mermaid](https://github.com/MrmoLabs/dsh-mermaid)，保留 MIT 许可与署名。本目录是为 `omdsh-dev/dsh-mermaid` 准备的独立仓库，远端创建和迁入需另行操作。Oh My DSH 是独立、非官方社区。
+在 DeepSeek Harness Web GUI 中渲染 Mermaid 图表，切换代码和图表视图、复制源码。基于 Mrmo072 的 [MrmoLabs/dsh-mermaid](https://github.com/MrmoLabs/dsh-mermaid)，保留 MIT 许可与署名。本插件在 `omdsh-dev/dsh-mermaid` 独立维护。Oh My DSH 是独立、非官方社区。
 
 ## 安装
 
@@ -41,7 +41,7 @@ pnpm pack:check artifacts/package.tgz
 
 `check.yml` 在推送和 PR 时依次安装、类型检查、构建、打包并核查归档，Actions 沿用原仓库锁定的 SHA。`release.yml` 仅允许在 `main` 上手动触发，并要求输入与清单一致的版本号。推送到 `main` 不会发布。流水线先检查归档，再以 npm OIDC 和 provenance 发布同一归档，不使用 npm token。
 
-新仓库首次发布前，需要登记仓库维护者、确认 npm 发布权限，将 npm trusted publisher 改为 `omdsh-dev/dsh-mermaid` 和 `release.yml`。当前保留版本可能已在 npm 上存在，不能重复发布，必须由维护者明确授权新版本后再操作。本次准备不创建远端、不发布软件包。
+新仓库首次发布前，需要登记仓库维护者、确认 npm 发布权限，将 npm trusted publisher 改为 `omdsh-dev/dsh-mermaid` 和 `release.yml`。已在 npm 上存在的版本不能重复发布，必须由维护者明确授权新版本后再操作。
 
 ## 发布前清单
 
@@ -53,7 +53,7 @@ pnpm pack:check artifacts/package.tgz
 - 核对宿主升级后代码块语义标记与文件侧栏性能兼容代码是否仍适用。
 - 确认要发布的版本尚不存在，取得修改版本与发布的明确授权，再在 `main` 手动触发；不要把保留的已发布版本当作可重复发布的版本。
 
-普通问题可在远端建立后使用仓库 Issue。不要公开提交凭据、个人数据或可利用漏洞；启用 GitHub 私密漏洞报告时使用该入口，否则先与登记维护者约定私密渠道，再发送细节。
+普通问题使用仓库 Issue。不要公开提交凭据、个人数据或可利用漏洞；启用 GitHub 私密漏洞报告时使用该入口，否则先与登记维护者约定私密渠道，再发送细节。
 
 ## 许可
 
